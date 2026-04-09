@@ -45,7 +45,7 @@ This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-
 
 -   **Chat Objects:** Learn how to create and manage chat objects, which maintain the context of your conversation with the LLM. 
 -   **LLM Providers:** Explore how to connect to different LLM providers like Google Gemini.
--   **Prompts and context:** Understand the basics what the LLM knows and what your enviornment can see.
+-   **Prompts and context:** Understand the basics of what the LLM knows and what your environment can see.
 
 
 ### Your First Chat
@@ -75,7 +75,7 @@ code_helper_chat <- chat_google_gemini(
 # Now, ask your question using the `$chat()` method.
 code_helper_chat$chat("I have a data frame in R called 'plant_data' with a numeric column 'height' and a factor 'treatment_group'. I just ran a Kruskal-Wallis test and it was significant. How do I perform a pairwise Wilcoxon test as a post-hoc analysis, adjusting p-values for multiple comparisons using the Holm method?")
 ```
-The LLM *should* provide you with the R code and an explanation. This is much faster than searching through documentation or web forums. But note, asking questions does not send your R-environment's context/variables/histroy/etc to the LLM.
+The LLM *should* provide you with the R code and an explanation. This is much faster than searching through documentation or web forums. But note, asking questions does not send your R-environment's context/variables/history/etc to the LLM.
 
 ### Chat with a System Prompt
 
@@ -219,7 +219,7 @@ cat("Key Finding:", structured_response$key_finding, "\n")
 Imagine running this in a loop over hundreds of abstracts - a huge time saver! Read more about [ellmer's structured data](https://ellmer.tidyverse.org/articles/structured-data.html) and [type specifications](https://ellmer.tidyverse.org/reference/type_boolean.html).
 
 ## Module 1 Conclusion
-You've now learned the core functionalities of `ellmer`.You can:
+You've now learned the core functionalities of `ellmer`. You can:
 
 - Connect to LLMs securely from R.
 - Use LLMs as assistants for coding, debugging, and brainstorming.
@@ -293,7 +293,7 @@ ragnar_store_build_index(store)
 cat("\nKnowledge store has been built successfully at:", store_location, "\n")
 ```
 
-Here we read in all our (markdown) documents, we "chunk" them into some kind of contextual tokens (usually sections, paragraphs, sentences, etc), we then convert the chunks into a numerical representation based on how this "embedding model" links semanticly similar tokens/chunks. See the docs for more info:
+Here we read in all our (markdown) documents, we "chunk" them into some kind of contextual tokens (usually sections, paragraphs, sentences, etc), we then convert the chunks into a numerical representation based on how this "embedding model" links semantically similar tokens/chunks. See the docs for more info:
 
 -   [`markdown_chunk()`](https://ragnar.tidyverse.org/reference/markdown_chunk.html)
 -   [`gemini-embedding-001`](https://cloud.google.com/vertex-ai/generative-ai/docs/embeddings/get-text-embeddings#supported-models)
@@ -343,7 +343,7 @@ lab_chat$chat("What is the protocol for performing a comet assay?")
 ```
 
 ## Module 2 Conclusion
-Fantastic work! You have now built a complete, end-to-end RAG system.You can:
+Fantastic work! You have now built a complete, end-to-end RAG system. You can:
 
 - Create a knowledge store from your own documents (`ragnar_store_create`).
 - Ingest and chunk text documents into the store (`ragnar_store_insert`).
@@ -372,7 +372,7 @@ library(chattr, lib.loc = "./Rlibs")
 
 ```{r}
 chat <- ellmer::chat_google_gemini(
-  model = "gemini-flash-latest, 
+  model = "gemini-flash-latest", 
   api_key=Sys.getenv("GEMINI_API_KEY")
   )
   
