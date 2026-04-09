@@ -8,7 +8,7 @@ How to use of Large Language Models (LLMs) directly within your R environment.
 
 Join the [GDG AI for Science community](https://gdg.community.dev/events/details/google-gdg-ai-for-science-australia-presents-using-large-language-models-from-r) for talks, events, workshops,  collaborations and more.
 
-Follow along the workshop material: https://gdgforscience.github.io/LLMs-from-R/
+Follow along the workshop material: https://gdgaiforscience.github.io/LLMs-from-R/
 
 Or via a Kaggle R notebook: https://www.kaggle.com/code/astrobutter/gdg-ai-for-science-llms-from-r
 
