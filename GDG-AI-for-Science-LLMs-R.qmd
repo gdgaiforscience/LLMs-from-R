@@ -13,9 +13,9 @@ This workshop will introduce the use of Large Language Models (LLMs) directly wi
 
 -   Basic knowledge of R and the RStudio IDE.
 
-[![ ](./aiforsci.png)](https://gdg.community.dev/gdg-ai-for-science-australia/)
+[![ ](./aiforsci.png)](https://gdg.community.dev/gdg-ai-for-science-australia/) [![ ](./rladies.png)](https://www.meetup.com/rladies-sydney/)
 
-This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-ai-for-science-australia/) workshop series. Join the community for talks, events, collaborations and more.
+This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-ai-for-science-australia/) workshop series collaborating with the [R-Ladies](https://rladiessydney.org/). Join the communities for talks, events, collaborations and more.
 
 
 ## **Installation and Setup**
@@ -248,7 +248,7 @@ library(ellmer, lib.loc = "./Rlibs")
 
 ### Download some example "documents"
 
-Grab a few markdown files from [here](https://github.com/gdgforscience/LLMs-from-R/raw/refs/heads/main/lab_sops.zip). Unzip the three `*.md` files and point to the directory below. These are in markdown format so follow a nice natural context for chunking/tokenizing. If your documents are in different formats, you may have to use different chunking strategies.
+Grab a few markdown files from [here](https://github.com/gdgaiforscience/LLMs-from-R/raw/refs/heads/main/lab_sops.zip). Unzip the three `*.md` files and point to the directory below. These are in markdown format so follow a nice natural context for chunking/tokenizing. If your documents are in different formats, you may have to use different chunking strategies.
 
 ### Build the knowledge store
 
