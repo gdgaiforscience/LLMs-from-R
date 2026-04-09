@@ -65,9 +65,9 @@ library(ellmer, lib.loc = "./Rlibs")
 # post-hoc test after a Kruskal-Wallis test, but you can't remember the exact
 # function or its arguments.
 # Create your first chat object. An ellmer chat-object maintains the conversation's state/context.
-# We'll use the gemini 2.0 flash model as it's fast and cost-effective.
+# We'll use the gemini flash model as it's fast and cost-effective.
 code_helper_chat <- chat_google_gemini(
-  model = "gemini-2.0-flash", 
+  model = "gemini-flash-latest", 
   api_key=Sys.getenv("GEMINI_API_KEY")
   )
 # Note: you don't strictly have to set api_key if the GEMINI_API_KEY (or similar per provider) is set in this exact format.
@@ -88,7 +88,7 @@ The LLM *should* provide you with the R code and an explanation. This is much fa
 # We can use a "system prompt" to tell the LLM to adopt a specific persona.
 # This guides its responses to be more focused and relevant.
 biostat_chat <- chat_google_gemini(
-  model = "gemini-2.5-pro", 
+  model = "gemini-pro-latest", 
   system_prompt = "You are a helpful and experienced biostatistician. Your goal is to provide clear, practical advice on experimental design for biomedical researchers. Do not write R code unless explicitly asked.", 
   api_key=Sys.getenv("GEMINI_API_KEY")
   )
@@ -119,7 +119,7 @@ survey_responses <- c(
 # Now, we use the `chat_google_gemini` function, similar to the previous example.
 # We'll use a system prompt to instruct the LLM on its task.
 sentiment_chat <- chat_google_gemini(
-  model = "gemini-2.0-flash", 
+  model = "gemini-flash-latest", 
   system_prompt = "You are a helpful text analysis assistant. Your only task is to perform sentiment analysis on the provided text. For each text string, return a single-word classification: 'Positive', 'Negative', or 'Neutral'. Do not provide any other text or explanation.",
   api_key=Sys.getenv("GEMINI_API_KEY") 
 )
@@ -148,7 +148,7 @@ In this small example we can pass R variables into the LLM and build new variabl
 # ---
 # Scenario: A collaborator sent you a Python script that does a crucial data cleaning step, but your entire workflow is in R.
 # Let's create a new, clean chat object for this task.
-translator_chat <- chat_google_gemini(model = "gemini-2.0-flash", api_key=Sys.getenv("GEMINI_API_KEY"))
+translator_chat <- chat_google_gemini(model = "gemini-flash-latest", api_key=Sys.getenv("GEMINI_API_KEY"))
 
 # You can have a multi-turn conversation. First, provide the Python code.
 translator_chat$chat("Translate the following Python pandas code into R using dplyr.
@@ -194,7 +194,7 @@ abstract_schema <- type_object(
 # Step 2: Create a chat object configured to use this schema.
 # The `response` argument tells ellmer to expect a structured response.
 extractor_chat <- chat_google_gemini(
-  model = "gemini-2.5-flash",
+  model = "gemini-flash-latest",
   system_prompt = "Extract the requested information from the following abstract.",
   api_key=Sys.getenv("GEMINI_API_KEY")
   )
@@ -372,7 +372,7 @@ library(chattr, lib.loc = "./Rlibs")
 
 ```{r}
 chat <- ellmer::chat_google_gemini(
-  model = "gemini-2.5-flash", 
+  model = "gemini-flash-latest, 
   api_key=Sys.getenv("GEMINI_API_KEY")
   )
   
