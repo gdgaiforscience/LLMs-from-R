@@ -32,7 +32,7 @@ This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-
 
 > Note: I needed to also add additional packages to my setup inclusing: `install.packages("coro","withr","curl","vctrs")` - you may have to install a few on your local machine.
 
--   Set up API keys from https://aistudio.google.com/ or equivalent.
+-   Set up API keys from [https://aistudio.google.com/](https://aistudio.google.com/) or equivalent.
 ```{r}
 #Sys.setenv(GEMINI_API_KEY = "xxxx")
 ```
