@@ -1,0 +1,18 @@
+project:
+  type: website
+  resources:
+    - styles.css
+
+website:
+  title: "**Using Large Language Models (LLMs) from R **"
+  google-analytics:
+    tracking-id: "G-73M2QY1ZMJ"
+    storage: cookies
+    anonymize-ip: true
+  repo-url: https://github.com/gdgaiforscience/LLMs-from-R
+  repo-actions: [edit]
+
+format:
+  html:
+    css: styles.css
+    code-overflow: wrap
