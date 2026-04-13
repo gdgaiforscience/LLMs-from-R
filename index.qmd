@@ -1,5 +1,6 @@
 ---
 title: '**Using Large Language Models (LLMs) from R **'
+engine: markdown
 format:
   html:
     code-overflow: wrap
