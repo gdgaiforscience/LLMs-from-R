@@ -30,7 +30,7 @@ This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-
 #install.packages(c("ellmer","ragnar","chattr"), lib="./Rlibs")
 ```
 
-> Note: I needed to also add additional packages to my setup inclusing: `install.packages("coro","withr","curl","vctrs")` - you may have to install a few on your local machine.
+> Note: I needed to also add additional packages to my setup inclusing: `install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises"), lib="./Rlibs")` - you may have to install a few on your local machine.
 
 -   Set up API keys from [https://aistudio.google.com/](https://aistudio.google.com/) or equivalent.
 ```{r}
@@ -92,7 +92,7 @@ The LLM *should* provide you with the R code and an explanation. This is much fa
 # We can use a "system prompt" to tell the LLM to adopt a specific persona.
 # This guides its responses to be more focused and relevant.
 biostat_chat <- chat_google_gemini(
-  model = "gemini-pro-latest", 
+  model = "gemini-flash-latest", 
   system_prompt = "You are a helpful and experienced biostatistician. Your goal is to provide clear, practical advice on experimental design for biomedical researchers. Do not write R code unless explicitly asked.", 
   )
 
@@ -188,10 +188,11 @@ By using the same `translator_chat` object it will send the full context every t
 # Step 1: Define the structure of the data you want to extract.
 # We use the `type_object()` function to define a schema.
 abstract_schema <- type_object(
-  study_organism = type_string("The primary organism or cell line studied."),
-  sample_size = type_integer("The total number of subjects or primary samples used."),
-  statistical_test = type_string("The main statistical test mentioned in the abstract."),
-  key_finding = type_string("A one-sentence summary of the main conclusion."))
+    study_organism = type_string("The primary organism or cell line studied."),
+    sample_size = type_integer("The total number of subjects or primary samples used."),
+    statistical_test = type_string("The main statistical test mentioned in the abstract."),
+    key_finding = type_string("A one-sentence summary of the main conclusion.")
+  )
 
 # Step 2: Create a chat object configured to use this schema.
 # The `response` argument tells ellmer to expect a structured response.
@@ -241,8 +242,8 @@ In the next module, we will explore `ragnar` to make the LLM even more powerful 
 
 ### Load the ellmer and ragnar packages
 ```{r}
-library(ragnar, lib.loc = "./Rlibs")
 library(ellmer, lib.loc = "./Rlibs")
+library(ragnar, lib.loc = "./Rlibs")
 # Set your Gemini API key value
 # Sys.setenv(GEMINI_API_KEY = "xxxx")
 ```
@@ -264,14 +265,10 @@ Grab a few markdown files from [here](https://github.com/gdgaiforscience/LLMs-fr
 # The `embed` function is used to convert text chunks into numerical vectors.
 store_location <- file.path("./lab_protocol_store.duckdb")
 
-# To avoid re-creating the store every time, you can add a check
-if (file.exists(store_location)) {  
-  file.remove(store_location)
-  }
-
 store <- ragnar_store_create(
   store_location,
-  embed = \(x) embed_google_gemini(x, model = "gemini-embedding-001", api_key = Sys.getenv("GEMINI_API_KEY"))
+  embed = \(x) embed_google_gemini(x, model = "gemini-embedding-001"),
+  overwrite = TRUE, #Overwrite the current database if it exists
 )
 
 # Step 2: Ingest the documents
@@ -322,9 +319,8 @@ print(retrieved_chunks$text)
 # a new "tool" that allows it to search our knowledge store.
 # Create an ellmer chat object with a system prompt defining its persona.
 lab_assistant_chat <- chat_google_gemini(
-  model = "gemini-2.0-flash",
-  system_prompt = "You are the 'Official Lab Assistant'. Your job is to answer questions by exclusively using the information provided from the lab's SOP documents. If the answer is not in the provided documents, you must state that the information is not available in the lab protocols. Do not use your general knowledge.",
-  api_key = Sys.getenv("GEMINI_API_KEY")
+  model = "gemini-2.5-flash",
+  system_prompt = "You are the 'Official Lab Assistant'. Your job is to answer questions by exclusively using the information provided from the lab's SOP documents. If the answer is not in the provided documents, you must state that the information is not available in the lab protocols. Do not use your general knowledge."
   )
 
 # This is the magic step! Register the retrieval function as a tool.
