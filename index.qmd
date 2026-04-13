@@ -30,7 +30,7 @@ This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-
 #install.packages(c("ellmer","ragnar","chattr"), lib="./Rlibs")
 ```
 
-> Note: I needed to also add additional packages to my setup inclusing: `install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises"), lib="./Rlibs")` - you may have to install a few on your local machine.
+> Note: I needed to also add additional packages to my setup inclusing: `install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises","shiny"), lib="./Rlibs")` - you may have to install a few on your local machine.
 
 -   Set up API keys from [https://aistudio.google.com/](https://aistudio.google.com/) or equivalent.
 ```{r}
@@ -369,8 +369,7 @@ library(chattr, lib.loc = "./Rlibs")
 
 ```{r}
 chat <- ellmer::chat_google_gemini(
-  model = "gemini-flash-latest", 
-  api_key=Sys.getenv("GEMINI_API_KEY")
+  model = "gemini-flash-latest"
   )
   
 chattr_use(chat)
@@ -392,7 +391,15 @@ This workshop has provided you with a solid foundation for using LLMs in R. You'
 - Build powerful RAG workflows with `ragnar`.
 - Seamlessly integrate LLMs into your RStudio workflow with `chattr`.
 
-Consider [ollamar](https://hauselin.github.io/ollama-r/) for local LLMs.
+Dive deeper into LLM-support in R with these packages:
+ 
+ - [ollamar](https://hauselin.github.io/ollama-r/) for local LLMs.
+ - [shinychat](https://posit-dev.github.io/shinychat/r/index.html) for a Shiny-based chat application.
+ - [vitals](https://vitals.tidyverse.org/) for eval benchmarks and grounding of your LLMs.
+ - [mcptools](https://posit-dev.github.io/mcptools/) to interact with Model Context Protocol servers.
+ - [gander](https://simonpcouch.github.io/gander/) RStudio completions like Copilot.
+ - [mall](https://mlverse.github.io/mall/) for LLM/NLP predictions on your data.
+ - [chores](https://simonpcouch.github.io/chores/) ergonomic LLM assistants in RStudio.
 
 Got a library you prefer? Let us know: gdgforscience@gmail.com
 
