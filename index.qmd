@@ -16,7 +16,7 @@ This workshop will introduce the use of Large Language Models (LLMs) directly wi
 
 -   Basic knowledge of R and the RStudio IDE.
 
-[![ ](./aiforsci.png)](https://gdg.community.dev/gdg-ai-for-science-australia/) [![ ](./rladies.png)](https://www.meetup.com/rladies-sydney/)
+[![ ](./aiforsci.png){style="max-height: 200px;"}](https://gdg.community.dev/gdg-ai-for-science-australia/) [![ ](./rladies.png){style="max-height: 200px;"}](https://www.meetup.com/rladies-sydney/)
 
 This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-ai-for-science-australia/) workshop series collaborating with the [R-Ladies](https://rladiessydney.org/). Join the communities for talks, events, collaborations and more.
 
