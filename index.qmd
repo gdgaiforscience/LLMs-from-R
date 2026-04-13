@@ -22,13 +22,15 @@ This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-
 
 ## **Installation and Setup**
 
--   Install the [`ellmer`](https://ellmer.tidyverse.org/),[`ragnar`](https://ragnar.tidyverse.org), and [`chattr`](https://mlverse.github.io/chattr/) package from CRAN as below. *ragnar* may take up to about 1 hour to install. 
+-   Install the [`ellmer`](https://ellmer.tidyverse.org/),[`ragnar`](https://ragnar.tidyverse.org), and [`chattr`](https://mlverse.github.io/chattr/) package from CRAN as below. *ragnar* may take up to about 1 hour to install. These are working on RStudio/R 4.5.3 on Mac. Your device and OS may need system level packages. 
 
 ```{r}
 #new_libs <- file.path(getwd(), "Rlibs")
 #if (!dir.exists(new_libs)) {dir.create(new_libs)}
 #install.packages(c("ellmer","ragnar","chattr"), lib="./Rlibs")
 ```
+
+> Note: I needed to run `install.packages("coro")` for ellmer to load.
 
 -   Set up API keys from https://aistudio.google.com/ or equivalent.
 ```{r}
