@@ -1,5 +1,6 @@
 project:
   type: website
+  engine: markdown
   resources:
     - styles.css
 
