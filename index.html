@@ -233,10 +233,9 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>biostat_chat <span class="ot">&lt;-</span> <span class="fu">chat_google_gemini</span>(</span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemini-pro-latest"</span>, </span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">system_prompt =</span> <span class="st">"You are a helpful and experienced biostatistician. Your goal is to provide clear, practical advice on experimental design for biomedical researchers. Do not write R code unless explicitly asked."</span>, </span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">api_key=</span><span class="fu">Sys.getenv</span>(<span class="st">"GEMINI_API_KEY"</span>)</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>biostat_chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"I am planning an experiment to test three new drug compounds (A, B, C) against a vehicle control on a human colon cancer cell line (HT-29). My primary outcome is cell viability measured by an MTS assay at 48 hours. What are the key things I need to consider for my experimental design to ensure the results are robust and publishable? Specifically, what are some potential confounding variables and how can I control for them?"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>biostat_chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"I am planning an experiment to test three new drug compounds (A, B, C) against a vehicle control on a human colon cancer cell line (HT-29). My primary outcome is cell viability measured by an MTS assay at 48 hours. What are the key things I need to consider for my experimental design to ensure the results are robust and publishable? Specifically, what are some potential confounding variables and how can I control for them?"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>By providing the system prompt you can closer tweak the model to your use-case.</p>
 </section>
@@ -264,22 +263,21 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>sentiment_chat <span class="ot">&lt;-</span> <span class="fu">chat_google_gemini</span>(</span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemini-flash-latest"</span>, </span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">system_prompt =</span> <span class="st">"You are a helpful text analysis assistant. Your only task is to perform sentiment analysis on the provided text. For each text string, return a single-word classification: 'Positive', 'Negative', or 'Neutral'. Do not provide any other text or explanation."</span>,</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">api_key=</span><span class="fu">Sys.getenv</span>(<span class="st">"GEMINI_API_KEY"</span>) </span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># We use a loop to iterate through each survey response and send it to the LLM.</span></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="co"># The LLM's response is then captured and stored.</span></span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>sentiment_results <span class="ot">&lt;-</span> <span class="fu">lapply</span>(survey_responses, <span class="cf">function</span>(response) {</span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> sentiment_chat<span class="sc">$</span><span class="fu">chat</span>(response)</span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Assuming the result is a direct text string, we can extract it.</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust the extraction method depending on the exact `chat` function output structure.</span></span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
-<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's see the results.</span></span>
-<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sentiment_results)</span>
-<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected Output: A list or vector containing the sentiment labels for each response.</span></span>
-<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="co"># This output can then be used for further analysis in R, such as creating a frequency table or adding the sentiment as a new column in a data frame.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="co"># We use a loop to iterate through each survey response and send it to the LLM.</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="co"># The LLM's response is then captured and stored.</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>sentiment_results <span class="ot">&lt;-</span> <span class="fu">lapply</span>(survey_responses, <span class="cf">function</span>(response) {</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> sentiment_chat<span class="sc">$</span><span class="fu">chat</span>(response)</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Assuming the result is a direct text string, we can extract it.</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Adjust the extraction method depending on the exact `chat` function output structure.</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's see the results.</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sentiment_results)</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected Output: A list or vector containing the sentiment labels for each response.</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="co"># This output can then be used for further analysis in R, such as creating a frequency table or adding the sentiment as a new column in a data frame.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>In this small example we can pass R variables into the LLM and build new variables based on the output.</p>
 </section>
@@ -291,7 +289,7 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ---</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Scenario: A collaborator sent you a Python script that does a crucial data cleaning step, but your entire workflow is in R.</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's create a new, clean chat object for this task.</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>translator_chat <span class="ot">&lt;-</span> <span class="fu">chat_google_gemini</span>(<span class="at">model =</span> <span class="st">"gemini-flash-latest"</span>, <span class="at">api_key=</span><span class="fu">Sys.getenv</span>(<span class="st">"GEMINI_API_KEY"</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>translator_chat <span class="ot">&lt;-</span> <span class="fu">chat_google_gemini</span>(<span class="at">model =</span> <span class="st">"gemini-flash-latest"</span>)</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># You can have a multi-turn conversation. First, provide the Python code.</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>translator_chat<span class="sc">$</span><span class="fu">chat</span>(<span class="st">"Translate the following Python pandas code into R using dplyr.</span></span>
@@ -338,26 +336,25 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="co"># The `response` argument tells ellmer to expect a structured response.</span></span>
 <span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>extractor_chat <span class="ot">&lt;-</span> <span class="fu">chat_google_gemini</span>(</span>
 <span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemini-flash-latest"</span>,</span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">system_prompt =</span> <span class="st">"Extract the requested information from the following abstract."</span>,</span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">api_key=</span><span class="fu">Sys.getenv</span>(<span class="st">"GEMINI_API_KEY"</span>)</span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Provide the unstructured text (our sample abstract).</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>abstract_text <span class="ot">&lt;-</span> <span class="st">"The role of gene XYZ in cellular metabolism was investigated in the murine model.Using a cohort of 60 male C57BL/6J mice (30 wild-type, 30 knockout for gene XYZ),we measured serum glucose levels following a 6-hour fast. A two-sample t-testrevealed significantly higher glucose levels in the knockout group (p &lt; 0.001)compared to wild-type controls. These results strongly suggest that gene XYZplays a critical role in maintaining glucose homeostasis."</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the $chat_structured() method to send your input to your chat object and request structured output</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>structured_response <span class="ot">&lt;-</span> extractor_chat<span class="sc">$</span><span class="fu">chat_structured</span>(</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  abstract_text,</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> abstract_schema</span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co"># The result is a clean, structured R list!</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(structured_response)</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co"># You can easily access the elements</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Study Organism:"</span>, structured_response<span class="sc">$</span>study_organism, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Sample Size:"</span>, structured_response<span class="sc">$</span>sample_size, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Key Finding:"</span>, structured_response<span class="sc">$</span>key_finding, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">system_prompt =</span> <span class="st">"Extract the requested information from the following abstract."</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Provide the unstructured text (our sample abstract).</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>abstract_text <span class="ot">&lt;-</span> <span class="st">"The role of gene XYZ in cellular metabolism was investigated in the murine model.Using a cohort of 60 male C57BL/6J mice (30 wild-type, 30 knockout for gene XYZ),we measured serum glucose levels following a 6-hour fast. A two-sample t-testrevealed significantly higher glucose levels in the knockout group (p &lt; 0.001)compared to wild-type controls. These results strongly suggest that gene XYZplays a critical role in maintaining glucose homeostasis."</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Use the $chat_structured() method to send your input to your chat object and request structured output</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>structured_response <span class="ot">&lt;-</span> extractor_chat<span class="sc">$</span><span class="fu">chat_structured</span>(</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  abstract_text,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> abstract_schema</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co"># The result is a clean, structured R list!</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(structured_response)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co"># You can easily access the elements</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Study Organism:"</span>, structured_response<span class="sc">$</span>study_organism, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Sample Size:"</span>, structured_response<span class="sc">$</span>sample_size, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Key Finding:"</span>, structured_response<span class="sc">$</span>key_finding, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Imagine running this in a loop over hundreds of abstracts - a huge time saver! Read more about <a href="https://ellmer.tidyverse.org/articles/structured-data.html">ellmer’s structured data</a> and <a href="https://ellmer.tidyverse.org/reference/type_boolean.html">type specifications</a>.</p>
 </section>
