@@ -94,7 +94,6 @@ The LLM *should* provide you with the R code and an explanation. This is much fa
 biostat_chat <- chat_google_gemini(
   model = "gemini-pro-latest", 
   system_prompt = "You are a helpful and experienced biostatistician. Your goal is to provide clear, practical advice on experimental design for biomedical researchers. Do not write R code unless explicitly asked.", 
-  api_key=Sys.getenv("GEMINI_API_KEY")
   )
 
 biostat_chat$chat("I am planning an experiment to test three new drug compounds (A, B, C) against a vehicle control on a human colon cancer cell line (HT-29). My primary outcome is cell viability measured by an MTS assay at 48 hours. What are the key things I need to consider for my experimental design to ensure the results are robust and publishable? Specifically, what are some potential confounding variables and how can I control for them?")
@@ -125,7 +124,6 @@ survey_responses <- c(
 sentiment_chat <- chat_google_gemini(
   model = "gemini-flash-latest", 
   system_prompt = "You are a helpful text analysis assistant. Your only task is to perform sentiment analysis on the provided text. For each text string, return a single-word classification: 'Positive', 'Negative', or 'Neutral'. Do not provide any other text or explanation.",
-  api_key=Sys.getenv("GEMINI_API_KEY") 
 )
 
 # We use a loop to iterate through each survey response and send it to the LLM.
@@ -152,7 +150,7 @@ In this small example we can pass R variables into the LLM and build new variabl
 # ---
 # Scenario: A collaborator sent you a Python script that does a crucial data cleaning step, but your entire workflow is in R.
 # Let's create a new, clean chat object for this task.
-translator_chat <- chat_google_gemini(model = "gemini-flash-latest", api_key=Sys.getenv("GEMINI_API_KEY"))
+translator_chat <- chat_google_gemini(model = "gemini-flash-latest")
 
 # You can have a multi-turn conversation. First, provide the Python code.
 translator_chat$chat("Translate the following Python pandas code into R using dplyr.
@@ -199,8 +197,7 @@ abstract_schema <- type_object(
 # The `response` argument tells ellmer to expect a structured response.
 extractor_chat <- chat_google_gemini(
   model = "gemini-flash-latest",
-  system_prompt = "Extract the requested information from the following abstract.",
-  api_key=Sys.getenv("GEMINI_API_KEY")
+  system_prompt = "Extract the requested information from the following abstract."
   )
 
 # Step 3: Provide the unstructured text (our sample abstract).
