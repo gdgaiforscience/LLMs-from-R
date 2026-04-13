@@ -1,8 +1,9 @@
 project:
   type: website
-  engine: markdown
   resources:
     - styles.css
+
+engine: markdown
 
 website:
   title: "**Using Large Language Models (LLMs) from R **"
