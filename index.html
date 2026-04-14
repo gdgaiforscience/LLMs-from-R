@@ -166,7 +166,7 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(c("ellmer","ragnar","chattr"), lib="./Rlibs")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <blockquote class="blockquote">
-<p>Note: I needed to also add additional packages to my setup inclusing: <code>install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises"), lib="./Rlibs")</code> - you may have to install a few on your local machine.</p>
+<p>Note: I needed to also add additional packages to my setup inclusing: <code>install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises","shiny"), lib="./Rlibs")</code> - you may have to install a few on your local machine.</p>
 </blockquote>
 <ul>
 <li>Set up API keys from <a href="https://aistudio.google.com/">https://aistudio.google.com/</a> or equivalent.</li>
@@ -515,11 +515,10 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>chat <span class="ot">&lt;-</span> ellmer<span class="sc">::</span><span class="fu">chat_google_gemini</span>(</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemini-flash-latest"</span>, </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">api_key=</span><span class="fu">Sys.getenv</span>(<span class="st">"GEMINI_API_KEY"</span>)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="fu">chattr_use</span>(chat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemini-flash-latest"</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">chattr_use</span>(chat)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Now call the app!</p>
 <div class="cell">
@@ -539,7 +538,16 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <li>Build powerful RAG workflows with <code>ragnar</code>.</li>
 <li>Seamlessly integrate LLMs into your RStudio workflow with <code>chattr</code>.</li>
 </ul>
-<p>Consider <a href="https://hauselin.github.io/ollama-r/">ollamar</a> for local LLMs.</p>
+<p>Dive deeper into LLM-support in R with these packages:</p>
+<ul>
+<li><a href="https://hauselin.github.io/ollama-r/">ollamar</a> for local LLMs.</li>
+<li><a href="https://posit-dev.github.io/shinychat/r/index.html">shinychat</a> for a Shiny-based chat application.</li>
+<li><a href="https://vitals.tidyverse.org/">vitals</a> for eval benchmarks and grounding of your LLMs.</li>
+<li><a href="https://posit-dev.github.io/mcptools/">mcptools</a> to interact with Model Context Protocol servers.</li>
+<li><a href="https://simonpcouch.github.io/gander/">gander</a> RStudio completions like Copilot.</li>
+<li><a href="https://mlverse.github.io/mall/">mall</a> for LLM/NLP predictions on your data.</li>
+<li><a href="https://simonpcouch.github.io/chores/">chores</a> ergonomic LLM assistants in RStudio.</li>
+</ul>
 <p>Got a library you prefer? Let us know: gdgforscience@gmail.com</p>
 <p>Now you’re ready to explore using LLMs to enhance your R-based research.</p>
 
