@@ -161,12 +161,13 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <li>Install the <a href="https://ellmer.tidyverse.org/"><code>ellmer</code></a>,<a href="https://ragnar.tidyverse.org"><code>ragnar</code></a>, and <a href="https://mlverse.github.io/chattr/"><code>chattr</code></a> package from CRAN as below. <em>ragnar</em> may take up to about 1 hour to install. These are working on RStudio 2026.01.2 and R 4.5.3 on Mac Silicon.</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#new_libs &lt;- file.path(getwd(), "Rlibs")</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#if (!dir.exists(new_libs)) {dir.create(new_libs)}</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(c("ellmer","ragnar","chattr"), lib="./Rlibs")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#setwd("~/LLMs-from-R")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#new_libs &lt;- file.path(getwd(), "Rlibs")</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#if (!dir.exists(new_libs)) {dir.create(new_libs)}</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(c("ellmer","ragnar","chattr"), lib="./Rlibs")</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <blockquote class="blockquote">
-<p>Note: I needed additional packages for my setup including: <code>install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises","shiny"), lib="./Rlibs")</code> - you may have to install a few on your local machine.</p>
+<p>Note: I needed additional packages for my setup including: <code>install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises","shiny","gargle"), lib="./Rlibs")</code> - you may have to install a few on your local machine.</p>
 </blockquote>
 <ul>
 <li>Set up API keys from <a href="https://aistudio.google.com/">https://aistudio.google.com/</a> or equivalent.</li>
