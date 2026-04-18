@@ -25,12 +25,13 @@ This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-
 -   Install the [`ellmer`](https://ellmer.tidyverse.org/),[`ragnar`](https://ragnar.tidyverse.org), and [`chattr`](https://mlverse.github.io/chattr/) package from CRAN as below. *ragnar* may take up to about 1 hour to install. These are working on RStudio 2026.01.2 and R 4.5.3 on Mac Silicon. 
 
 ```{r}
+#setwd("~/LLMs-from-R")
 #new_libs <- file.path(getwd(), "Rlibs")
 #if (!dir.exists(new_libs)) {dir.create(new_libs)}
 #install.packages(c("ellmer","ragnar","chattr"), lib="./Rlibs")
 ```
 
-> Note: I needed additional packages for my setup including: `install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises","shiny"), lib="./Rlibs")` - you may have to install a few on your local machine.
+> Note: I needed additional packages for my setup including: `install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises","shiny","gargle"), lib="./Rlibs")` - you may have to install a few on your local machine.
 
 -   Set up API keys from [https://aistudio.google.com/](https://aistudio.google.com/) or equivalent.
 ```{r}
