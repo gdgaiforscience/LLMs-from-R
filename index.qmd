@@ -34,6 +34,9 @@ install.packages(c("ellmer","ragnar","chattr"), lib="./Rlibs")
 > Note: I needed additional packages for my setup including: `install.packages(c("coro","withr","curl","vctrs","reticulate","duckdb","blob","commonmark","dplyr","promises","shiny"), lib="./Rlibs")` - you may have to install a few on your local machine.
 
 -   Set up API keys from [https://aistudio.google.com/](https://aistudio.google.com/) or equivalent.
+
+> Be aware of the [Free Tier Rate/Usage limits]. Use the `gemini-2.5-flash-lite`, `gemini-3.1-flash-lite-preview`, `gemini-2.5-flash`, and `gemini-3-flash-preview`. Use [`chat_google_vertex`](https://ellmer.tidyverse.org/reference/chat_google_gemini.html) endpoints to take advantage of cloud credits.
+
 ```{r}
 Sys.setenv(GEMINI_API_KEY = "xxxx")
 ```
@@ -55,12 +58,10 @@ Sys.setenv(GEMINI_API_KEY = "xxxx")
 
 ### Your First Chat
 
-These code snippets will guide you through the basics of the `ellmer` package. Always start by loading the ellmer package - your gateway to LLMs in R. And setting an API key.
+These code snippets will guide you through the basics of the `ellmer` package. Always start by loading the ellmer package. And setting an API key.
 
 ```{r}
 library(ellmer)
-
-# Make sure billing is enabled on your GCP project
 Sys.getenv("GEMINI_API_KEY")
 ```
 
@@ -382,87 +383,43 @@ Now call the app!
 # Launch the Shiny gadget. Test a prompt in the pop-up that shows in Viewer.
 chattr_app()
 ```
+Or send a quick prompt directly. Note where you call it from, will be where the repsonse is returned!
 ```{r}
-# Or send a quick prompt directly
 chattr("Make me a ggplot example")
 ```
 
-### Chattr in Google Colab
-This would work quite differently from the method used for RStudio.
-Start with a new Google colab notebook and change the runtime type to R.
+Now add more context to your calls!
+Start by defining a function for chattr to handle:
 ```{r}
-install.packages("chattr")
-install.packages("ellmer")
+get_results_columns <- function() {
+  if (exists("results_data")) {
+    cols <- paste(colnames(sales_data), collapse = ", ")
+    return(paste("The results_data data frame has the following columns:", cols))
+  }
+  return("results_data does not exist yet.")
+}
 ```
-```{r}
-# The notebook is currently using an R kernel.
-# Set the Gemini API key in R for packages to use:
-Sys.setenv(GEMINI_API_KEY = "xxxx")
-```
-```{r}
-chat <- ellmer::chat_google_gemini(
-  model = "gemini-flash-latest"
-)
-```
-chattr_use() sets the active model.
-```{r}
-chattr::chattr_use(chat)
-```
-```{r}
-# chattr_test() verifies that the connection to Gemini is working properly
-chattr::chattr_test()
-```
-```{r}
-chattr::chattr("Make me a ggplot example")
-```
-```{r}
-chattr::chattr("Customize the previous ggplot example with a different theme, like theme_dark() or theme_bw()")
-```
-Generate a ggplot visual using the generated chattr plot
-```{r}
-install.packages("tidyverse")
-library(tidyverse)
-# Generating the fuel efficiency scatter plot with theme_dark()
-# Plot the relationship between city and highway mileage
-ggplot(data = mpg, mapping = aes(x = cty, y = hwy, color = class)) +
-  geom_point(size = 2, alpha = 0.7) +
-  geom_smooth(method = "lm", se = FALSE, formula = y ~ x) +
-  labs(
-    title = "Fuel Efficiency: City vs Highway Mileage",
-    subtitle = "Visualized using theme_dark()",
-    x = "City Miles per Gallon",
-    y = "Highway Miles per Gallon",
-    color = "Vehicle Type"
-  ) +
-  theme_dark() +
-  theme(legend.position = "bottom")
-```
-```{r}
-# Save the generated ggplot to a PNG file
-# Adjust the width, height, and dpi (resolution) as needed
-ggsave("fuel_efficiency_plot.png", width = 8, height = 6, dpi = 300)
 
-print("Plot saved to 'fuel_efficiency_plot.png'!")
-```
+Then inject it into the prompt defaults
 ```{r}
-# Ask the LLM for more complex ggplot2 customizations
-chattr::chattr("Update the previous ggplot fuel efficiency example with more complex customizations: add faceting by the 'drv' (drive train) variable, use a custom color palette like scale_color_viridis_d(), and modify the theme to adjust the base text size and legend position.")
+chattr_defaults(prompt = "{ get_results_columns() }")
 ```
-```{r}
-# library(shiny)
-# chattr::chattr_app()
-```
-Because Colab runs in the cloud, chattr_app() will start a local web server and print a local URL (e.g., http://127.0.0.1:xxxx). You won't be able to open this URL directly in your browser because your computer is separate from the Colab virtual machine.
 
-To interact with chattr effectively inside Colab, it is usually best to stick to the text-based chattr::chattr("your prompt") command like we did previously!
-
-Tips for recreating above modules on Colab:
-- Skip the `./Rlibs` custom library path — use plain `install.packages()`.
-- Download the SOPs programmatically instead of manually:
+Create a small mock data set
 ```{r}
-  download.file("https://github.com/gdgaiforscience/LLMs-from-R/raw/refs/heads/main/lab_sops.zip", "lab_sops.zip")
-  unzip("lab_sops.zip")
+results_data <- data.frame(Date = "2026-04-20", Amount = 150, ID = 3)
 ```
+Now ask a question! The LLM will already know the columns are Date, Amount, and ID.
+```{r}
+chattr("Write code to group by id and sum the amounts.")
+```
+
+## Notes for use in Google Colab
+`ellmer` works as normal. 
+
+`ragnar` takes a long time to install but otherwise works as expected.
+
+`chattr` can't connect to the interactive shiny app, but you can still use command line text-based syntax.
 
 
 # **Conclusion and Further Resources**
