@@ -158,7 +158,7 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <section id="installation-and-setup" class="level2">
 <h2 class="anchored" data-anchor-id="installation-and-setup"><strong>Installation and Setup</strong></h2>
 <ul>
-<li>Install the <a href="https://ellmer.tidyverse.org/"><code>ellmer</code></a>,<a href="https://ragnar.tidyverse.org"><code>ragnar</code></a>, and <a href="https://mlverse.github.io/chattr/"><code>chattr</code></a> package from CRAN as below. <em>ragnar</em> may take up to about 1 hour to install. These are working on RStudio 2026.01.2 and R 4.5.3 on Mac Silicon. Works on R 4.4.3 and above on Windows as well.</li>
+<li>Install the <a href="https://ellmer.tidyverse.org/"><code>ellmer</code></a>,<a href="https://ragnar.tidyverse.org"><code>ragnar</code></a>, and <a href="https://mlverse.github.io/chattr/"><code>chattr</code></a> package from CRAN as below. <em>ragnar</em> may take up to about 1 hour to install. These have been tested as working on RStudio 2026.01.2 and R 4.5.3 on Mac Silicon, plus R 4.4.3 and above on Windows.</li>
 </ul>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>new_libs <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">getwd</span>(), <span class="st">"Rlibs"</span>)</span>
@@ -173,7 +173,7 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <li>Set up API keys from <a href="https://aistudio.google.com/">https://aistudio.google.com/</a> or equivalent.</li>
 </ul>
 <blockquote class="blockquote">
-<p>Be aware of the [Free Tier Rate/Usage limits]. Use the <code>gemini-2.5-flash-lite</code>, <code>gemini-3.1-flash-lite-preview</code>, <code>gemini-2.5-flash</code>, and <code>gemini-3-flash-preview</code>. Use <a href="https://ellmer.tidyverse.org/reference/chat_google_gemini.html"><code>chat_google_vertex</code></a> endpoints to take advantage of cloud credits.</p>
+<p>Note: Be aware of the <a href="https://aistudio.google.com/rate-limit">Free Tier Rate/Usage limits</a>. The <code>gemini-2.5-flash-lite</code>, <code>gemini-3.1-flash-lite-preview</code>, <code>gemini-2.5-flash</code>, and <code>gemini-3-flash-preview</code> models have the most free-tier. When using the paid-tier, I recommend <a href="https://ellmer.tidyverse.org/reference/chat_google_gemini.html"><code>chat_google_vertex</code></a> endpoints to take advantage of cloud credits.</p>
 </blockquote>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Sys.setenv</span>(<span class="at">GEMINI_API_KEY =</span> <span class="st">"xxxx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -235,7 +235,7 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a "system prompt" to give the LLM a persona.</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This guides its responses to be more focused and relevant.</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>biostat_chat <span class="ot">&lt;-</span> <span class="fu">chat_google_gemini</span>(</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemini-flash-latest"</span>, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemini-3.1-flash-lite-preview"</span>, </span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">system_prompt =</span> <span class="st">"You are a helpful and experienced biostatistician.</span></span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="st">  Your goal is to provide clear, practical advice on experimental design for biomedical researchers.</span></span>
 <span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="st">  Do not write R code unless explicitly asked."</span></span>
@@ -267,7 +267,7 @@ gtag('config', 'G-73M2QY1ZMJ', { 'anonymize_ip': true});
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Now, we use the `chat_google_gemini` function, similar to the previous example.</span></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll use a system prompt to instruct the LLM on its task.</span></span>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>sentiment_chat <span class="ot">&lt;-</span> <span class="fu">chat_google_gemini</span>(</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemini-flash-latest"</span>, </span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">model =</span> <span class="st">"gemini-3.1-flash-lite-preview"</span>, </span>
 <span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">system_prompt =</span> <span class="st">"You are a helpful text analysis assistant. Your only task is to perform sentiment analysis on the provided text. For each text string, return a single-word classification: 'Positive', 'Negative', or 'Neutral'. Do not provide any other text or explanation."</span></span>
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a></span>
