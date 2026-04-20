@@ -96,7 +96,7 @@ The LLM *should* provide you with the R code and an explanation. This is much fa
 # Use a "system prompt" to give the LLM a persona.
 # This guides its responses to be more focused and relevant.
 biostat_chat <- chat_google_gemini(
-  model = "gemini-flash-latest", 
+  model = "gemini-3.1-flash-lite-preview", 
   system_prompt = "You are a helpful and experienced biostatistician.
   Your goal is to provide clear, practical advice on experimental design for biomedical researchers.
   Do not write R code unless explicitly asked."
@@ -128,7 +128,7 @@ survey_responses <- c(
 # Now, we use the `chat_google_gemini` function, similar to the previous example.
 # We'll use a system prompt to instruct the LLM on its task.
 sentiment_chat <- chat_google_gemini(
-  model = "gemini-flash-latest", 
+  model = "gemini-3.1-flash-lite-preview", 
   system_prompt = "You are a helpful text analysis assistant. Your only task is to perform sentiment analysis on the provided text. For each text string, return a single-word classification: 'Positive', 'Negative', or 'Neutral'. Do not provide any other text or explanation."
 )
 
