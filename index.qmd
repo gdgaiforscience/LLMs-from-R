@@ -22,7 +22,7 @@ This workshop is part of the [GDG AI for Science](https://gdg.community.dev/gdg-
 
 ## **Installation and Setup**
 
--   Install the [`ellmer`](https://ellmer.tidyverse.org/),[`ragnar`](https://ragnar.tidyverse.org), and [`chattr`](https://mlverse.github.io/chattr/) package from CRAN as below. *ragnar* may take up to about 1 hour to install. These are working on RStudio 2026.01.2 and R 4.5.3 on Mac Silicon. Works on R 4.4.3 and above on Windows as well.
+-   Install the [`ellmer`](https://ellmer.tidyverse.org/),[`ragnar`](https://ragnar.tidyverse.org), and [`chattr`](https://mlverse.github.io/chattr/) package from CRAN as below. *ragnar* may take up to about 1 hour to install. These have been tested as working on RStudio 2026.01.2 and R 4.5.3 on Mac Silicon, plus R 4.4.3 and above on Windows.
 
 ```{r}
 new_libs <- file.path(getwd(), "Rlibs")
@@ -35,7 +35,7 @@ install.packages(c("ellmer","ragnar","chattr"), lib="./Rlibs")
 
 -   Set up API keys from [https://aistudio.google.com/](https://aistudio.google.com/) or equivalent.
 
-> Be aware of the [Free Tier Rate/Usage limits]. Use the `gemini-2.5-flash-lite`, `gemini-3.1-flash-lite-preview`, `gemini-2.5-flash`, and `gemini-3-flash-preview`. Use [`chat_google_vertex`](https://ellmer.tidyverse.org/reference/chat_google_gemini.html) endpoints to take advantage of cloud credits.
+> Note: Be aware of the [Free Tier Rate/Usage limits](https://aistudio.google.com/rate-limit). The `gemini-2.5-flash-lite`, `gemini-3.1-flash-lite-preview`, `gemini-2.5-flash`, and `gemini-3-flash-preview` models have the most free-tier. When using the paid-tier, I recommend  [`chat_google_vertex`](https://ellmer.tidyverse.org/reference/chat_google_gemini.html) endpoints to take advantage of cloud credits.
 
 ```{r}
 Sys.setenv(GEMINI_API_KEY = "xxxx")
